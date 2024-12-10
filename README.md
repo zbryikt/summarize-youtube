@@ -32,3 +32,8 @@ install whisper and yt-dlp:
 
     pip install git+https://github.com/openai/whisper.git
     pip install -U yt-dlp
+
+
+## License
+
+MIT
