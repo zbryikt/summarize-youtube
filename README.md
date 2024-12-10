@@ -6,7 +6,7 @@ yt-dlp > whisper > ollama = summarized transcript.
 ## Prerequisite
 
  - This script is written in bash script and is expected to be run under MacOS or linux.
- - Ollama is a prerequisite so you have to install it manually. The model `llama3.1:8b` is used in `index.sh`.
+ - Ollama is a prerequisite so you have to install it manually. The model `gemma2:9b` is used in `index.sh`.
 
 
 ## Installation

@@ -47,7 +47,7 @@ whisper "${outdir}/mp3/${id}.mp3" --model base \
 transcript_path="${outdir}/transcript/${id}.txt"
 
 if [[ -f "$transcript_path" ]]; then
-  (echo "以下是某影片音訊轉譯出來的逐字稿內容，請用正體中文，以三個段落、約 300 字的規模做內容的摘要簡介。"; echo ""; cat "${outdir}/transcript/${id}.txt") | ollama run llama3.1:8b
+  (echo "以下是某影片音訊轉譯出來的逐字稿內容，請用正體中文，以三個段落、約 300 字的規模做內容的摘要簡介。"; echo ""; cat "${outdir}/transcript/${id}.txt") | ollama run gemma2:9b
 else
   echo "Error: Transcription file not found: $transcript_path"
   exit 1
