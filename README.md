@@ -3,7 +3,15 @@
 yt-dlp > whisper > ollama = summarized transcript.
 
 
-install by clone it, pip install and link index.sh to your local bin folder, e.g.,
+## Prerequisite
+
+ - This script is written in bash script and is expected to be run under MacOS or linux.
+ - Ollama is a prerequisite so you have to install it manually. The model `llama3.1:8b` is used in `index.sh`.
+
+
+## Installation
+
+Install by cloning this repo, `pip install` and link `index.sh` to your local `bin` folder, e.g.,
 
     cd repo # assume you cloned it to ~/repo
     pyenv global 3.12.7 # make sure python version
@@ -17,6 +25,8 @@ install by clone it, pip install and link index.sh to your local bin folder, e.g
 usage (say you named it `summarize-youtube`):
     
     summarize-youtube <Youtube-URL>
+
+Intermediate files are stored under `/tmp/.summarize-youtube-out/`.
 
 
 ## Dev Memo
