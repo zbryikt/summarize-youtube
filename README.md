@@ -28,6 +28,12 @@ usage (say you named it `summarize-youtube`):
 
 Intermediate files are stored under `/tmp/.summarize-youtube-out/`.
 
+Optionally use a different whisper model by `-m` option:
+
+    summarize-youtube <Youtube-URL> -m turbo
+
+Default model is `base`. Check [Whisper Repo](https://github.com/openai/whisper) for all possible models.
+
 
 ## Dev Memo
 

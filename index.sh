@@ -23,7 +23,7 @@ done
 if [[ $show_help -eq 1 ]]; then
   echo "Usage: $0 -m <model> [-h]"
   echo "Options:"
-  echo "  -m <model>   Specify the model name."
+  echo "  -m <model>   Specify the model name. Available modes: tiny, base, small, medium, large, turbo"
   echo "  -h           Show this help message."
   exit 0
 fi
