@@ -44,6 +44,13 @@ install whisper and yt-dlp:
     pip install -U yt-dlp
 
 
+## TODO
+
+Consider using `whisper-ctranslate2` for faster generation and to prevent repeated texts when no audio is present:
+
+ - https://github.com/Softcatala/whisper-ctranslate2?tab=readme-ov-file
+
+
 ## License
 
 MIT

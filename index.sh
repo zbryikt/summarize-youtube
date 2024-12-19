@@ -2,6 +2,37 @@
 script_path=$(readlink -f "$0")
 script_dir=$(dirname "$script_path")
 venv_path="${script_dir}/venv"
+model="base"
+show_help=0
+
+while getopts "m:h" opt; do
+  case "$opt" in
+    m)
+      model="$OPTARG"
+      ;;
+    h)
+      show_help=1
+      ;;
+    *)
+      echo "Invalid option: -$OPTARG"
+      exit 1
+      ;;
+  esac
+done
+
+if [[ $show_help -eq 1 ]]; then
+  echo "Usage: $0 -m <model> [-h]"
+  echo "Options:"
+  echo "  -m <model>   Specify the model name."
+  echo "  -h           Show this help message."
+  exit 0
+fi
+
+shift $((OPTIND - 1))
+for arg in "$@"; do
+  OTHER_ARGS+=("$arg")
+done
+url=$OTHER_ARGS
 
 if [[ -f "${venv_path}/bin/activate" ]]; then
   source "${venv_path}/bin/activate"
@@ -13,12 +44,13 @@ fi
 trap "kill -- -$$; deactivate" exit # killing all process on current group on exit
 trap "exit; deactivate" SIGINT SIGTERM # on ctrl-c, exit script.
 
-input="$1"
+echo "[summarize-youtube] Using Model: $model"
+echo "[summarize-youtube] Target URL : $url"
 
-if [[ "$input" =~ ^https?://(www\.)?youtube\.com/watch\?v=([^&]+) ]]; then
+if [[ "$url" =~ ^https?://(www\.)?youtube\.com/watch\?v=([^&]+) ]]; then
   id="${BASH_REMATCH[2]}"
 else
-  id="$input"
+  id="$url"
 fi
 
 
@@ -41,7 +73,7 @@ mkdir -p "${outdir}/mp3"
 yt-dlp -f bestaudio --extract-audio --audio-format mp3 -o "${outdir}/mp3/%(id)s.mp3" \
   "https://www.youtube.com/watch?v=${id}" || ( echo "Error: failed to download audio." && deactivate && exit 1 )
 
-whisper "${outdir}/mp3/${id}.mp3" --model base \
+whisper "${outdir}/mp3/${id}.mp3" --model $model \
   --output_dir "${outdir}/transcript" || ( echo "Error: whisper transacription failed." && deactivate && exit 1 )
 
 transcript_path="${outdir}/transcript/${id}.txt"
